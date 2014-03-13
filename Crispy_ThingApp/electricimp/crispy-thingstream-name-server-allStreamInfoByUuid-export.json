@@ -1,0 +1,20 @@
+{
+  "healthStatus-crispy-impv00-H6LfA48Gcqds" : {
+    "timeOffset" : "absolute",
+    "ticksPerSecond" : 1000,
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-H6LfA48Gcqds",
+    "typeUuid" : "IACrispyHw-string-v0-0-0",
+    "thingUuid" : "crispy-impv00-H6LfA48Gcqds"
+  },
+  "debugLog-crispy-impv00-H6LfA48Gcqds" : {
+    "timeOffset" : "absolute",
+    "ticksPerSecond" : 1000,
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-H6LfA48Gcqds",
+    "typeUuid" : "IACrispyHw-string-v0-0-0",
+    "thingUuid" : "crispy-impv00-H6LfA48Gcqds"
+  }
+}

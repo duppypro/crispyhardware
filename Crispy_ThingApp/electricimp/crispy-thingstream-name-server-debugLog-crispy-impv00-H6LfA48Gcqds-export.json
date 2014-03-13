@@ -1,0 +1,9 @@
+{
+  "timeOffset" : "absolute",
+  "ticksPerSecond" : 1000,
+  "name" : "debugLog",
+  "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+  "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-H6LfA48Gcqds",
+  "typeUuid" : "IACrispyHw-string-v0-0-0",
+  "thingUuid" : "crispy-impv00-H6LfA48Gcqds"
+}
