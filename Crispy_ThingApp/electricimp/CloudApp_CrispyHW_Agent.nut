@@ -5,7 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy v00.01.2014-03-13b"
+const versionString = "crispy v00.01.2014-03-13c"
 const logIndent   = ".........>.........>.........>.........>.........>.........>.........>.........>.........>.........>.........>"
 logVerbosity <- 100 // higer numbers show more log messages
 errorVerbosity <- 1000 // higher number shows more error messages

@@ -55,7 +55,7 @@
 			"file": "CloudApp_CrispyHW_Agent.nut",
 			"settings":
 			{
-				"buffer_size": 6783,
+				"buffer_size": 7384,
 				"line_ending": "Unix"
 			}
 		},
@@ -141,6 +141,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"CONNECTED",
 			"putStreamValue",
 			"agent.send",
 			"putStreamValue",
@@ -267,8 +268,7 @@
 			"agent",
 			"date",
 			"millis",
-			"ubi",
-			"offsetMilliseconds"
+			"ubi"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -297,15 +297,15 @@
 					"file": "CloudApp_CrispyHW_Agent.nut",
 					"settings":
 					{
-						"buffer_size": 6783,
+						"buffer_size": 7384,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								6783
+								206,
+								206
 							]
 						],
 						"settings":
@@ -338,8 +338,8 @@
 						"selection":
 						[
 							[
-								0,
-								6689
+								222,
+								222
 							]
 						],
 						"settings":
@@ -349,7 +349,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2787.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

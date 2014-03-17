@@ -71,7 +71,10 @@ function redrawList(d3Data, textFromD3Data) {
 	)
 
 	sessions.enter()
-		.append('div')
+		.append('pre')
+		.attr({
+			style : "font:'Lucida Console';font-size:9pt;background:#000;color:#0f0"
+		})
 
 	sessions
 		.text(textFromD3Data)

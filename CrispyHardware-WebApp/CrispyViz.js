@@ -1,7 +1,7 @@
 (function Viz() {
 
 "use strict"
-"2014-02-25a"
+"2014-03-17a"
 
 var refThingstreamServer = 'https://crispy-thingstream-name-server.firebaseio.com' // URL of the firebase
 var d3SelViz = d3.selectAll('#Viz') // DOM element that holds all visualizations
@@ -107,7 +107,7 @@ function redrawList(d3Data, textFromD3Data) {
 
 	sessions = this.d3SelThing
 	.selectAll('[name=' + this.info.VizName + ']')
-	.selectAll('div')
+	.selectAll('pre')
 	.data(
 		d3Data,
 		function (d) {
@@ -116,7 +116,10 @@ function redrawList(d3Data, textFromD3Data) {
 	)
 
 	sessions.enter()
-		.append('div')
+		.append('pre')
+		.attr({
+			style : "font:'Lucida Console';font-size:9pt;background:#000;color:#0f0"
+		})
 
 	sessions
 		.text(textFromD3Data)
