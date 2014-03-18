@@ -5,8 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy hardware v00.01.2014-03-13b"
-const logIndent   = ".........>.........>.........>.........>.........>.........>.........>.........>.........>.........>.........>"
+const versionString = "crispy hardware v00.01.2014-03-17b"
 impeeID <- hardware.getimpeeid() // cache the impeeID FIXME: is this necessary for speed?
 offsetMilliseconds <- 0 // set later to milliseconds % 1000 when time() rolls over //FIXME: need a better timesync solution here
 const sleepforTimeout = 60 // seconds idle before decrementing idleCount
@@ -14,6 +13,7 @@ const idleCountMax = 240 //3 // number sleepforTimeout periods before server.sle
 const sleepforDuration = 36000//300 // seconds to stay in deep sleep (wakeup is a reboot)
 idleCount <- idleCountMax // Current count of idleCountMax timer
 
+fakemicros <- 42 // start at arbitrary time, inc to prevent identical mills timestamps
 active <- false
 
 // configuration variables
@@ -31,7 +31,8 @@ function timestamp() {
     local t, m
     t = time()
     m = hardware.millis()
-    return format("%010u%03u", t, (m - offsetMilliseconds) % 1000)
+    fakemicros = (fakemicros + 1) % 1000
+    return format("%010u%03u%03u", t, (m - offsetMilliseconds) % 1000, fakemicros)
         // return milliseconds since Unix epoch 
 }
 
@@ -47,7 +48,8 @@ function checkActivity() {
                 "keepAlive": idleCount,
                 // "vBatt": getVBatt(),
                 "t": timestamp(),
-            }
+            },
+            "t" : timestamp(),
         }
     )
 
@@ -81,7 +83,9 @@ function checkActivity() {
 } // checkActivity
 
 function processCommand(commandString, port) {
-    local message = {}
+    local message = {
+        "t" : timestamp()
+    }
     
     message[port] <- commandString    
     agent.send(
@@ -171,12 +175,14 @@ agent.send(
     "event",
      {
         "debugLog" : "[BOOTING Electric Imp Device] " + versionString,
+        "t" : timestamp(),
      }
 )
 agent.send(
     "event",
      {
         "debugLogB" : "[BOOTING Electric Imp Device] " + versionString,
+        "t" : timestamp(),
      }
 )
 

@@ -46,14 +46,6 @@
 				"buffer_size": 10453,
 				"line_ending": "Unix"
 			}
-		},
-		{
-			"file": "CRISPYHardwareViz.js",
-			"settings":
-			{
-				"buffer_size": 9638,
-				"line_ending": "Unix"
-			}
 		}
 	],
 	"build_system": "",
@@ -84,6 +76,7 @@
 	},
 	"file_history":
 	[
+		"/Users/duppy/Documents/GitHub/crispyhardware/CrispyHardware-WebApp/CRISPYHardwareViz.js",
 		"/Users/duppy/Documents/GitHub/Crispy_ThingApp/electricimp/crispy-thingstream-name-server-allStreamInfoByUuid-export (2).json",
 		"/Users/duppy/Documents/GitHub/ElectricDice_ThingApp/ElectricImp_Dice/CloudApp_Imp_Soda_Agent.nut",
 		"/Users/duppy/Documents/GitHub/ElectricDice_ThingApp/ElectricImp_Dice/ThingApp_Imp_Soda_Device.nut",
@@ -318,8 +311,8 @@
 						"selection":
 						[
 							[
-								3448,
-								3448
+								3327,
+								3327
 							]
 						],
 						"settings":
@@ -329,33 +322,6 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 1641.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "CRISPYHardwareViz.js",
-					"settings":
-					{
-						"buffer_size": 9638,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

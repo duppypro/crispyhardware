@@ -5,10 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy v00.01.2014-03-13c"
-const logIndent   = ".........>.........>.........>.........>.........>.........>.........>.........>.........>.........>.........>"
-logVerbosity <- 100 // higer numbers show more log messages
-errorVerbosity <- 1000 // higher number shows more error messages
+const versionString = "crispy v00.01.2014-03-17b"
 fakeMillis <- 42 // fake out millisecond times for debugging
 
 ///////////////////////////////////////////////
@@ -45,18 +42,6 @@ myThingInfo <- {}
 //define functions
 
 //generic
-function log(string, level) {
-    local indent = logIndent.slice(0, level / 10)
-    if (level <= logVerbosity)
-        server.log(indent + string)
-}
-
-function error(string, level) {
-    local indent = logIndent.slice(0, level / 10)
-    if (level <= errorVerbosity)
-        server.error(indent + string)
-}
-
 function timestamp() {
     local dateNow = date()
     return format("%010d%03d", dateNow.time, dateNow.usec / 1000)
@@ -66,9 +51,9 @@ function timestamp() {
 function putStreamValue(table, timeKey) {
     foreach (key, obj in table) {
         if (key in refBigDataByName) {
-            log("PUT " + key + "/" + timeKey + "/.json", 50)
-            log("PUT " + refBigDataByName[key] + "/" + timeKey + "/.json", 50)
-            log(http.jsonencode(obj), 100)
+            server.log("PUT " + key + "/" + timeKey + "/.json")
+            server.log("PUT " + refBigDataByName[key] + "/" + timeKey + "/.json")
+            server.log(http.jsonencode(obj))
             http.request(
                 "PUT",
                 refBigDataByName[key] + "/" + timeKey + "/.json",
@@ -76,7 +61,9 @@ function putStreamValue(table, timeKey) {
                 http.jsonencode(obj)
             ).sendasync(checkHttpRequestResponse)
         } else {
-            error("Unknown key : " + key, 10)
+            if (key != "t") {
+                server.error("Unknown key : " + key)
+            }
         }
     }
 }
@@ -86,7 +73,7 @@ http.onrequest(function(req,res) {
     local table = req.query
     local responseString = "PUT Stream Values :"
 
-    log("@" + timeKey + " REST REQUEST " + http.jsonencode(table), 100)    
+    server.log("@" + timeKey + " REST REQUEST " + http.jsonencode(table))    
     putStreamValue(table, timeKey)
     responseString += "\r\n-------------------\r\n"
     foreach (key, obj in table) {
@@ -102,7 +89,7 @@ http.onrequest(function(req,res) {
 })
 
 device.onconnect(function() {
-    log("Connect", 100)
+    server.log("Connect")
     putStreamValue(
         {
             "debugLog" : "[Agent detected device CONNECTED]",
@@ -119,7 +106,7 @@ device.onconnect(function() {
 
 device.ondisconnect(function() { // FIXME: send info to healthstatus when disconnect 
     // BUGBUG: Agent does not detect device disconnect right away.
-    log("Disconnect", 100)
+    server.log("Disconnect")
     putStreamValue(
         {
             "debugLog" : "[Agent detected device *DIS*CONNECTED]",
@@ -136,33 +123,34 @@ device.ondisconnect(function() { // FIXME: send info to healthstatus when discon
 
 device.on("event", function(table) {
     local timeKey = timestamp()
-    log("@" + timeKey + " Device sent\r\n" + http.jsonencode(table) || table, 100)
+    server.log("@" + timeKey + " Device sent\r\n" + http.jsonencode(table) || table)
     // post to firebase
-    putStreamValue(table, timeKey)
+    // putStreamValue(table, timeKey)
+    putStreamValue(table, table.t)
 })
 
 function checkHttpRequestResponse(m) {
     if (m.statuscode == 200) {
-        log("Request Complete : " + m.body, 1100)
+        server.log("Request Complete : " + m.body)
     } else if (m.statuscode == 201) {
-        log("non-error statuscode 201 : " + m.body, 100)
+        server.log("non-error statuscode 201 : " + m.body)
     } else {
-        error("REQUEST error " + m.statuscode + "\r\n" + m.body, 10)
+        server.error("REQUEST error " + m.statuscode + "\r\n" + m.body)
     }
 }
  
 ////////////////////////////////////////////////////////
 // first Agent code starts here
-log("BOOTING_________ : " + versionString, 0)
-log("Imp Agent URL___ : " + http.agenturl(), 0)
-log("Agent SW version : " + imp.getsoftwareversion(), 0)
+server.log("BOOTING_________ : " + versionString)
+server.log("Imp Agent URL___ : " + http.agenturl())
+server.log("Agent SW version : " + imp.getsoftwareversion())
 impAgentURLRoot <- http.agenturl()
 impAgentURLRoot = impAgentURLRoot.slice(0, impAgentURLRoot.find("/", "https://".len()) + 1)
 timeSessionStart <- timestamp()
-log("refBigDataRoot__________ : " + refBigDataRoot, 10)
+server.log("refBigDataRoot__________ : " + refBigDataRoot)
 thingUuid <- uuidPrefix + http.agenturl().slice(impAgentURLRoot.len())
-log("thingUuid_______________ : " + thingUuid, 10)
-log("timeSessionStart________ : " + timeSessionStart, 10)
+server.log("thingUuid_______________ : " + thingUuid)
+server.log("timeSessionStart________ : " + timeSessionStart)
 streamUuidByName <- {
     "debugLog" : "debugLog-" + thingUuid,
     "debugLogB" : "debugLogB-" + thingUuid,
@@ -180,12 +168,11 @@ refAllSessionsByName <- {
 }
 // initialize new sessions for each out Stream
 foreach (key, val in refAllSessionsByName) {
-    log("PUT " + val + "/.json", 50)
-    log(
+    server.log("PUT " + val + "/.json")
+    server.log(
         http.jsonencode({
             "__REF__" : refBigDataByName[key]
-        }),
-        100
+        })
     )
     checkHttpRequestResponse(
         http.request(

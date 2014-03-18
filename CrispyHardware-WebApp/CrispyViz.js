@@ -1,7 +1,7 @@
 (function Viz() {
 
 "use strict"
-"2014-03-17a"
+"2014-03-17c"
 
 var refThingstreamServer = 'https://crispy-thingstream-name-server.firebaseio.com' // URL of the firebase
 var d3SelViz = d3.selectAll('#Viz') // DOM element that holds all visualizations
@@ -44,8 +44,10 @@ function fbUrl(pathArray) { // helper to construct URL from list of path parts
 
 function millisToLocalTimeStringFriendly(t) { // helper
 	var s,
-		time = new Date(parseInt(t,10)),
+		time,
 		months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+	time = new Date(parseInt(String(t).substr(0,13),10))
 	s = //time.getFullYear() + 
 		//'-' + 
 		// String('00' + (time.getMonth() + 1)).slice(-2) + 
@@ -55,7 +57,7 @@ function millisToLocalTimeStringFriendly(t) { // helper
 		':' + String('00' + time.getMinutes()).slice(-2) + 
 		':' + String('00' + time.getSeconds()).slice(-2) + 
 		// '.' + String('000' + t % 1000).slice(-3) + 
-		''
+		'.' + String(t).substr(10,6)
 		// ' (' + t + ')'
 	return s    
 }
@@ -86,7 +88,8 @@ function appendList(d3Selection, info) {
 		.append('div')		
 		.attr({
 			name : info.VizName,
-			class : 'col-6'
+			class : 'col-6',
+			style : 'resize:vertical;overflow:auto;height:248px'
 		})
 }
 
@@ -103,22 +106,25 @@ function appendDebugLogB(d3Selection) { // use with d3.call()
 }
 
 function redrawList(d3Data, textFromD3Data) {
+	var d
 	var sessions
 
-	sessions = this.d3SelThing
-	.selectAll('[name=' + this.info.VizName + ']')
-	.selectAll('pre')
-	.data(
-		d3Data,
-		function (d) {
-			return d.timeSessionStart
-		}
-	)
+	d = this.d3SelThing
+		.selectAll('[name=' + this.info.VizName + ']')
+
+	sessions = d
+		.selectAll('div')
+		.data(
+			d3Data,
+			function (d) {
+				return d.timeSessionStart
+			}
+		)
 
 	sessions.enter()
-		.append('pre')
+		.append('div')
 		.attr({
-			style : "font:'Lucida Console';font-size:9pt;background:#000;color:#0f0"
+			style : "font:'Lucida Console';font-size:9pt;background:#000;color:#0cd"
 		})
 
 	sessions
@@ -126,6 +132,8 @@ function redrawList(d3Data, textFromD3Data) {
 
 	sessions.exit()
 		.remove()
+
+	d.node().scrollTop = d.node().scrollHeight
 }
 
 function redrawDebugLog(d3Data) { // called on data change
@@ -148,15 +156,36 @@ function removeVizByThingUuid(thingUuid) {
 }
 
 function convertFBSnapToD3Data(snap) {
-	var d3Data = []
-	for(var timeSessionStart in snap.val()) { // convert JSON to array for use by d3
-		var obj = {}
-		obj.string = snap.val()[timeSessionStart]
-		// move timestamp form key name into object then push on the array
-		obj.timeSessionStart = timeSessionStart // allready in absolute milliseconds
-		d3Data.push(obj)
+	var d3Data
+	var d3Data2
+	var v = snap.val()
+	var keyArray
+	var startTime
+
+	// d3Data = []
+	// startTime = new Date()
+	// for(var timeSessionStart in v) { // convert JSON to array for use by d3
+	// 	var obj = {}
+	// 	obj.string = v[timeSessionStart]
+	// 	// move timestamp form key name into object then push on the array
+	// 	obj.timeSessionStart = timeSessionStart // allready in absolute milliseconds
+	// 	d3Data.push(obj)
+	// }
+	// console.log('for(var ... in... ) = ' + (new Date() - startTime))
+
+	d3Data2 = []
+	// startTime = new Date()
+	keyArray = Object.keys(v)
+	for (var i = 0, l = keyArray.length; i < l; i++) {
+		var t = keyArray[i]
+		d3Data2.push({
+			string : v[t],
+			timeSessionStart : t
+		})
 	}
-	return d3Data
+	// console.log('Object.keys() = ' + (new Date() - startTime))
+
+	return d3Data2
 }
 
 function onValueDebugLog(snap) {
@@ -323,18 +352,6 @@ refAllThingInfoByUuid.on(
 	function(snap) {
 		// clear existing
 		d3SelViz.selectAll('*').remove()
-/***		
-		d3SelButtons = d3SelViz
-			.append('div')
-			.attr({
-				class : 'panel panel-default col-12'
-			})
-			.append('div')
-			.attr({
-				class : 'panel-body btn-group',
-				name : 'buttonContainer'
-			})
-***/			
 		d3SelThingVizs = d3SelViz
 			.append('div')
 			.attr({
@@ -349,27 +366,6 @@ refAllThingInfoByUuid.on(
 			if (info.name == "CrispyHW Duppy 002") {
 				addVizFromThingUuid(thingUuid, info)
 			}
-/***
-			d3SelButtons
-				.append('button')
-				.attr({
-					thingUuid : thingUuid,
-					style : 'margin : 0px 2px;',
-					class : 'btn-small col-4'
-				})
-				.text(info.name || thingUuid)
-				.on('click', function() {
-					var thingUuid = d3.select(this).attr('thingUuid')
-					var info = snap.val()[thingUuid] // FIXME: how is snap included in context when referenced but not when not referenced and why is info not included in context? #stillajsnovice
-					console.log('clicked button thingUuid = ' + thingUuid)
-					if (this.classList.toggle('btn-primary')) {
-						// create new Viz dom elements and fb callbacks
-						addVizFromThingUuid(thingUuid, info)
-					} else {
-						removeVizByThingUuid(thingUuid)
-					}
-				})
-***/
 		}
 	}
 )//refAllThingInfoByUuid.on('value'...
