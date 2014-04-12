@@ -1,7 +1,7 @@
 (function Viz() {
 
 "use strict"
-"2014-03-18a"
+"2014-04-12a"
 
 var refThingstreamServer = 'https://crispy-thingstream-name-server.firebaseio.com' // URL of the firebase
 var d3SelViz = d3.selectAll('#Viz') // DOM element that holds all visualizations
@@ -124,7 +124,7 @@ function redrawList(d3Data, textFromD3Data) {
 	sessions.enter()
 		.append('div')
 		.attr({
-			style : "font:'Lucida Console';font-size:9pt;background:#000;color:lime"
+			style : "font:'Lucida Console';font-size:9pt;background:#000;color:#0cd"
 		})
 
 	sessions
@@ -352,6 +352,16 @@ refAllThingInfoByUuid.on(
 	function(snap) {
 		// clear existing
 		d3SelViz.selectAll('*').remove()
+		d3SelButtons = d3SelViz
+			.append('div')
+			.attr({
+				class : 'panel panel-default col-12'
+			})
+			.append('div')
+			.attr({
+				class : 'panel-body btn-group',
+				name : 'buttonContainer'
+			})
 		d3SelThingVizs = d3SelViz
 			.append('div')
 			.attr({
@@ -363,9 +373,25 @@ refAllThingInfoByUuid.on(
 		// add new Viz for each thingUuid	
 		for (var thingUuid in snap.val()) {
 			var info = snap.val()[thingUuid]
-			if (info.name == "CrispyHW Duppy 002") {
-				addVizFromThingUuid(thingUuid, info)
-			}
+			d3SelButtons
+				.append('button')
+				.attr({
+					thingUuid : thingUuid,
+					style : 'margin : 0px 2px;',
+					class : 'btn-small col-4'
+				})
+				.text(info.name || thingUuid)
+				.on('click', function() {
+					var thingUuid = d3.select(this).attr('thingUuid')
+					var info = snap.val()[thingUuid] // FIXME: how is snap included in context when referenced but not when not referenced and why is info not included in context
+					console.log('clicked button thingUuid = ' + thingUuid)
+					if (this.classList.toggle('btn-primary')) {
+						// create new Viz dom elements and fb callbacks
+						addVizFromThingUuid(thingUuid, info)
+					} else {
+						removeVizByThingUuid(thingUuid)
+					}
+				})
 		}
 	}
 )//refAllThingInfoByUuid.on('value'...

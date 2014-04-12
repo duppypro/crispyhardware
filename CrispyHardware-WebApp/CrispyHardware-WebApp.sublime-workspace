@@ -43,7 +43,7 @@
 			"file": "CrispyViz.js",
 			"settings":
 			{
-				"buffer_size": 10453,
+				"buffer_size": 10131,
 				"line_ending": "Unix"
 			}
 		}
@@ -288,7 +288,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4150.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -304,15 +304,15 @@
 					"file": "CrispyViz.js",
 					"settings":
 					{
-						"buffer_size": 10453,
+						"buffer_size": 10131,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3327,
-								3327
+								3547,
+								3547
 							]
 						],
 						"settings":
@@ -321,7 +321,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1641.0,
+						"translation.y": 1574.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

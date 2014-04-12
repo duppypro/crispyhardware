@@ -55,7 +55,7 @@
 			"file": "CloudApp_CrispyHW_Agent.nut",
 			"settings":
 			{
-				"buffer_size": 7384,
+				"buffer_size": 6948,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,7 +63,7 @@
 			"file": "ThingApp_CrispyHW_Device.nut",
 			"settings":
 			{
-				"buffer_size": 6689,
+				"buffer_size": 6817,
 				"line_ending": "Unix"
 			}
 		}
@@ -141,6 +141,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"putStreamValue",
+			"agent.send",
+			"processCommand",
+			"timestamp",
+			"error",
+			"log(",
+			"log\\(",
+			"log",
+			"log(",
+			"agent.send",
+			"offsetMilliseconds",
+			"putStreamValue",
+			"sessions",
+			"putStreamValue",
+			"timestamp",
+			"timeKey",
+			"timestamp",
+			"offsetMilliseconds",
 			"CONNECTED",
 			"putStreamValue",
 			"agent.send",
@@ -250,25 +268,7 @@
 			"ubidots",
 			"getVBatt",
 			"firebaseURLParamsString",
-			"firebaseURLParamsTable",
-			"readSequentialRegs",
-			"uuid",
-			"checkActivity",
-			"initMMA8452Q",
-			"fakeMillis",
-			"agent.send",
-			"getVBatt",
-			"complete",
-			"timestamp",
-			"send",
-			"timestamp",
-			"firebaseUUID",
-			"timestamp",
-			"offsetMilliseconds",
-			"agent",
-			"date",
-			"millis",
-			"ubi"
+			"firebaseURLParamsTable"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -297,15 +297,15 @@
 					"file": "CloudApp_CrispyHW_Agent.nut",
 					"settings":
 					{
-						"buffer_size": 7384,
+						"buffer_size": 6948,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								206,
-								206
+								0,
+								6948
 							]
 						],
 						"settings":
@@ -315,7 +315,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 548.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -331,15 +331,15 @@
 					"file": "ThingApp_CrispyHW_Device.nut",
 					"settings":
 					{
-						"buffer_size": 6689,
+						"buffer_size": 6817,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								222,
-								222
+								0,
+								6817
 							]
 						],
 						"settings":
@@ -349,7 +349,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2505.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -385,7 +385,7 @@
 		"cols":
 		[
 			0.0,
-			0.510461157536,
+			0.429681213246,
 			1.0
 		],
 		"rows":
