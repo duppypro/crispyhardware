@@ -42,6 +42,24 @@ function fbUrl(pathArray) { // helper to construct URL from list of path parts
 	return pathArray.join('/')
 }
 
+function compareKey(keyName, sortOrder, returnObject) {
+	// sortOrder is >0 for ascending, <0 for descending (reversed), ==0 for no change defaults to 1
+	if (returnObject) {
+		returnObject.less = 0
+		returnObject.more = 0
+		returnObject.equal = 0
+	}
+	return function (d1, d2) {
+		var result = (sortOrder || 1) > 0 ? d1[keyName] - d2[keyName] : sortOrder < 0 ? d2[keyName] - d1[keyName] : 0
+		if (returnObject) {
+			result < 0 ? returnObject.less++
+				: result > 0 ? returnObject.more++
+					: returnObject.equal++  
+		}
+		return result
+	}
+}
+
 function millisToLocalTimeStringFriendly(t) { // helper
 	var s,
 		time,
@@ -126,9 +144,10 @@ function redrawList(d3Data, textFromD3Data) {
 		.attr({
 			style : "font:'Lucida Console';font-size:9pt;background:#000;color:#0cd"
 		})
+		.text(textFromD3Data)
 
 	sessions
-		.text(textFromD3Data)
+		.sort(compareKey('timeSessionStart'))
 
 	sessions.exit()
 		.remove()
