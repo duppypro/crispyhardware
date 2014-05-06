@@ -5,21 +5,23 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy hardware v00.01.2014-03-17b"
+const versionString = "crispy hardware v00.01.2014-05-05b"
 impeeID <- hardware.getimpeeid() // cache the impeeID FIXME: is this necessary for speed?
-offsetMilliseconds <- 0 // set later to milliseconds % 1000 when time() rolls over //FIXME: need a better timesync solution here
-const sleepforTimeout = 60 // seconds idle before decrementing idleCount
-const idleCountMax = 240 //3 // number sleepforTimeout periods before server.sleepfor()
-const sleepforDuration = 36000//300 // seconds to stay in deep sleep (wakeup is a reboot)
-idleCount <- idleCountMax // Current count of idleCountMax timer
+offsetMicros <- 0 // set later to microsseconds % 1000000 when time() rolls over //FIXME: need a better timesync solution here
+const sleepforTimeoutSecs = 60 // seconds idle before decrementing idleCount
+const idleCountMaxTimeouts = 22 //3 // number sleepforTimeoutSecs periods before server.sleepfor()
+const sleepforDurationSecs = 10800//10800 == 3hrs //300 // seconds to stay in deep sleep (wakeup is a reboot)
+idleCount <- idleCountMaxTimeouts // Current count of idleCountMaxTimeouts timer
 
-fakemicros <- 42 // start at arbitrary time, inc to prevent identical mills timestamps
 active <- false
 
 // configuration variables
-vBatt       <- hardware.pin2
-serialPort  <- hardware.uart57
-serialPortB  <- hardware.uart1289
+wakeupPin      <- hardware.pin1
+vBattPin       <- hardware.pin2
+serialPort     <- hardware.uart57
+serialPort_RX  <- hardware.pin7
+serialPortB    <- hardware.uart1289
+serialPortB_RX <- hardware.pin9
 
 // app specific globals
 
@@ -28,26 +30,50 @@ serialPortB  <- hardware.uart1289
 
 // start with generic functions
 function timestamp() {
-    local t, m
+    local t, t2, m, m2
     t = time()
-    m = hardware.millis()
-    fakemicros = (fakemicros + 1) % 1000
-    return format("%010u%03u%03u", t, (m - offsetMilliseconds) % 1000, fakemicros)
-        // return milliseconds since Unix epoch 
+    m = hardware.micros() // CONSTRAINT: t= and m= should be atomic but aren't
+    t2 = time()
+    m2 = hardware.micros()
+    if (t2 > t) { // check if time() seconds rolled over
+        offsetMicros = m2 % 1000000// re-calibrate offsetMicros
+        if (offsetMicros < 0) {
+            offsetMicros += 1000000 // Squirrel mod is remainder, not modulos
+        }
+        m = m2
+        m = (m - offsetMicros) % 1000000
+        if (m < 0) {
+            m += 1000000 // Squirrel mod is remainder, not modulos
+        }
+    } else {
+        m = (m - offsetMicros) % 1000000
+        if (m < 0) {
+            m += 1000000 // Squirrel mod is remainder, not modulos
+        }
+        if (m < lastMicros && lastUTCSeconds == t2) {
+            // we rolled over and didn't catch it
+            t2 = t2 + 1
+        }
+    }
+    lastMicros = m
+    lastUTCSeconds = t2
+    return format("%010u%06u", t2, m)
+        // return microseconds since Unix epoch 
 }
 
 function checkActivity() {
-// checkActivity re-schedules itself every sleepforTimeout
+// checkActivity re-schedules itself every sleepforTimeoutSecs
 // FIXME: checkActivity should be more generic
-    server.log("checkActivity() every " + sleepforTimeout + " secs.")
+    // server.log("checkActivity() every " + sleepforTimeoutSecs + " secs.")
     // let the agent know we are still alive
+    server.log("offsetMicros=" + offsetMicros)
+    server.log("hardware.micros()=" + hardware.micros())
     agent.send(
         "event",
         {
             "healthStatus" : {
                 "keepAlive": idleCount,
-                // "vBatt": getVBatt(),
-                "t": timestamp(),
+                // "vBattPin": getVBatt(),
             },
             "t" : timestamp(),
         }
@@ -55,31 +81,32 @@ function checkActivity() {
 
     server.log("idle : " + idleCount)
 
-    if (active) {
+    if (active || serialPort_RX.read() || serialPortB_RX.read()) {
         active = false
-        idleCount = idleCountMax // restart idle count down
+        idleCount = idleCountMaxTimeouts // restart idle count down
     } else {
         if (idleCount == 0) {
-            idleCount = idleCountMax
-            led1.write(0)
-            server.log("No activity for " + sleepforTimeout * idleCountMax + " to " + sleepforTimeout * (idleCountMax + 1) + " secs.\r\nGoing to deepsleep for " + (sleepforDuration / 60.0) + " minutes.")
+            idleCount = idleCountMaxTimeouts
+            server.log("No activity for " + sleepforTimeoutSecs * idleCountMaxTimeouts + " to " + sleepforTimeoutSecs * (idleCountMaxTimeouts + 1) + " secs.\r\nGoing to deepsleep for " + (sleepforDurationSecs / 60.0) + " minutes.")
             //
             // do app specific shutdown stuff here
             //
-            // serialPort.write("impsleep")
-            // serialPort.flush()
-            imp.sleep(0.333)
-
-            // keyPin.configure(DIGITAL_IN_WAKEUP, readKey)
-            // led1.configure(DIGITAL_IN_WAKEUP, wakeup)
-            imp.sleep(0.333)
-            imp.onidle(function() { server.sleepfor(sleepforDuration) })  // go to deepsleep if no activity for sleepforTimeout
+            agent.send(
+                "event",
+                {
+                    "healthStatus" : {
+                        "sleepforDurationSecs": sleepforDurationSecs,
+                    },
+                    "t" : timestamp(),
+                }
+            )
+            imp.onidle(function() { server.sleepfor(sleepforDurationSecs) })  // go to deepsleep if no activity for sleepforTimeoutSecs
         } else {
             idleCount -= 1
             imp.setpowersave(true) // FIXME: currently uneccessary, we are always in 5mA powersave mode
         }
     }
-    imp.wakeup(sleepforTimeout, checkActivity) // re-schedule self
+    imp.wakeup(sleepforTimeoutSecs, checkActivity) // re-schedule self
 } // checkActivity
 
 function processCommand(commandString, port) {
@@ -143,27 +170,34 @@ function readSerialPortB() {
 ////////////////////////////////////////////////////////
 // first code starts here
 
+wakeupPin.configure(DIGITAL_IN_WAKEUP) // let a button wake us up
 imp.setpowersave(true) // start in low power mode.
-/******* https://electricimp.com/docs/api/imp/setpowersave/
+/******* http://electricimp.com/docs/api/imp/setpowersave/
 Power-save mode is disabled by default; this means the WiFi radio receiver is enabled constantly. This results in the lowest latency for data transfers, but a high power drain (~60-80mA at 3.3v).
 
 Enabling power-save mode drops this down to < 5mA when the radio is idle (i.e., between transactions with the server). The down-side is added latency on received data transfers, which can be as high as 250ms.
 *******/
 
 // Send status to know we are alive
-server.log("BOOTING  " + versionString + " " + hardware.getimpeeid() + "/" + imp.getmacaddress())
+server.log("BOOTING " + versionString + " deviceId=" + hardware.getdeviceid() + " MAC:" + imp.getmacaddress())
 server.log("imp software version : " + imp.getsoftwareversion())
 server.log("connected to WiFi : " + imp.getbssid())
 
 // BUGBUG: below needed until newer firmware!?  See http://forums.electricimp.com/discussion/comment/4875#Comment_2714
 // imp.enableblinkup(true)
 
-local lastUTCSeconds = time()
+lastUTCSeconds <- time()
 while(lastUTCSeconds == time()) {
+} // wait for seonds to roll over
+offsetMicros = hardware.micros() % 1000000
+if (offsetMicros < 0) {
+    offsetMicros += 1000000 // Squirrel mod is remainder, not modulos
 }
-offsetMilliseconds = hardware.millis() % 1000
-// FIXME: should re-calibrate offset periodically, not just on boot
-server.log("offsetMilliseconds = " + offsetMilliseconds)
+lastMicros <- offsetMicros
+
+// this re-calibrates if timestamp() is read at a seonds rollover
+// FIXME: re-calibrate more often?
+server.log("offsetMicros = " + offsetMicros)
 
 serialStringMaxLength <- 80
 serialString <- blob(0)
@@ -186,8 +220,8 @@ agent.send(
      }
 )
 
-checkActivity() // kickstart checkActivity, this re-schedules itself every sleepforTimeout seconds
-// FIXME: checkActivity waits from sleepforTimeout to sleepforTimeout*2.  Make this more constant.
+checkActivity() // kickstart checkActivity, this re-schedules itself every sleepforTimeoutSecs seconds
+// FIXME: checkActivity waits from sleepforTimeoutSecs to sleepforTimeoutSecs*2.  Make this more constant.
 
 // No more code to execute so we'll sleep until an interrupts from serial or pin 1
 // End of code.

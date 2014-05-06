@@ -31,6 +31,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/index.html",
+			"settings":
+			{
+				"buffer_size": 1442,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/CrispyViz.js",
+			"settings":
+			{
+				"buffer_size": 11531,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -248,13 +264,75 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/index.html",
+					"settings":
+					{
+						"buffer_size": 1442,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1221,
+								1221
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/CrispyViz.js",
+					"settings":
+					{
+						"buffer_size": 11531,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4166,
+								4166
+							]
+						],
+						"settings":
+						{
+							"rulers":
+							[
+								120
+							],
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"wrap_width": 120
+						},
+						"translation.x": 0.0,
+						"translation.y": 2598.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -286,7 +364,7 @@
 		"cols":
 		[
 			0.0,
-			0.480919772736,
+			0.235086439403,
 			1.0
 		],
 		"rows":

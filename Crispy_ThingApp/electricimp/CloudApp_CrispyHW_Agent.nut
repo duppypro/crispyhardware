@@ -5,7 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy v00.01.2014-03-17b"
+const versionString = "crispy v00.01.2014-05-05b"
 fakeMillis <- 42 // fake out millisecond times for debugging
 
 ///////////////////////////////////////////////
@@ -51,9 +51,9 @@ function timestamp() {
 function putStreamValue(table, timeKey) {
     foreach (key, obj in table) {
         if (key in refBigDataByName) {
-            server.log("PUT " + key + "/" + timeKey + "/.json")
-            server.log("PUT " + refBigDataByName[key] + "/" + timeKey + "/.json")
-            server.log(http.jsonencode(obj))
+            // server.log("putStreamValue " + key + " @" + timeKey)
+            // server.log("PUT " + refBigDataByName[key] + "/" + timeKey + "/.json")
+            // server.log(http.jsonencode(obj))
             http.request(
                 "PUT",
                 refBigDataByName[key] + "/" + timeKey + "/.json",
@@ -122,16 +122,16 @@ device.ondisconnect(function() { // FIXME: send info to healthstatus when discon
 })
 
 device.on("event", function(table) {
-    local timeKey = timestamp()
-    server.log("@" + timeKey + " Device sent\r\n" + http.jsonencode(table) || table)
+    // server.log("device.on() " + http.jsonencode(table) || table)
     // post to firebase
-    // putStreamValue(table, timeKey)
-    putStreamValue(table, table.t)
+    if (table.t) {
+        putStreamValue(table, table.t) // use local timestamp usec level from device
+    }
 })
 
 function checkHttpRequestResponse(m) {
     if (m.statuscode == 200) {
-        server.log("Request Complete : " + m.body)
+        // server.log("Request Complete : " + m.body)
     } else if (m.statuscode == 201) {
         server.log("non-error statuscode 201 : " + m.body)
     } else {
