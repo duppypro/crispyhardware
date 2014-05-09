@@ -5,8 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy v00.01.2014-05-05b"
-fakeMillis <- 42 // fake out millisecond times for debugging
+const versionString = "crispy v00.01.2014-05-08a"
 
 ///////////////////////////////////////////////
 // constants for Firebase
@@ -44,7 +43,9 @@ myThingInfo <- {}
 //generic
 function timestamp() {
     local dateNow = date()
-    return format("%010d%03d", dateNow.time, dateNow.usec / 1000)
+    return format("%010u%03u000", dateNow.time, dateNow.usec / 1000)
+    // FIXME: This time is not in sync with device reported time
+    // Reporting millisec only because this time base is not in sync
 }
 
 // firebase specific
@@ -124,8 +125,10 @@ device.ondisconnect(function() { // FIXME: send info to healthstatus when discon
 device.on("event", function(table) {
     // server.log("device.on() " + http.jsonencode(table) || table)
     // post to firebase
-    if (table.t) {
+    if ("t" in table) {
         putStreamValue(table, table.t) // use local timestamp usec level from device
+    } else {
+        putStreamValue(table, timestamp()) // use electric imp cloud timestamp
     }
 })
 

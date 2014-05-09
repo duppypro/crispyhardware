@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"las",
+				"lastUTCSeconds"
+			],
+			[
+				"time",
+				"timestamp"
+			],
+			[
+				"of",
+				"offsetMicros"
+			],
+			[
+				"ser",
+				"serialPort_RX"
+			],
+			[
+				"sleepFor",
+				"sleepforDurationSecs"
+			],
+			[
+				"wake",
+				"wakeup"
+			],
+			[
 				"ver",
 				"versionString"
 			],
@@ -55,7 +79,7 @@
 			"file": "CloudApp_CrispyHW_Agent.nut",
 			"settings":
 			{
-				"buffer_size": 6948,
+				"buffer_size": 6949,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,7 +87,7 @@
 			"file": "ThingApp_CrispyHW_Device.nut",
 			"settings":
 			{
-				"buffer_size": 6817,
+				"buffer_size": 8073,
 				"line_ending": "Unix"
 			}
 		}
@@ -141,6 +165,37 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"lastMicros",
+			"+= 10000",
+			"putstream",
+			"putstrem",
+			"+= 1000000",
+			"% 1000000",
+			"offsetMicros",
+			"1000",
+			"request com",
+			"offsetMicros",
+			"%",
+			"offsetMicros",
+			"serialPort_RX",
+			"offsetMicros",
+			"offsetMilliseconds",
+			"serialPort_RX",
+			"VBatt",
+			"vBatt",
+			"wakeup",
+			"hardware.pin1",
+			"idleCountMax",
+			"sleepforTimeout",
+			"sleepforDuration",
+			"agent.send(",
+			"led1",
+			"keyPin",
+			"wakeup",
+			"22",
+			"sleepforDuration",
+			"active",
+			"server.log(",
 			"putStreamValue",
 			"agent.send",
 			"processCommand",
@@ -237,38 +292,7 @@
 			"fbRoot",
 			"log(",
 			"[^.]log\\(",
-			"[^.]error\\(",
-			"[~.]error\\(",
-			"^error\\(",
-			"^error(",
-			" error(",
-			" log(",
-			", [0-9]+\\)",
-			"log(",
-			"impAgentURLRoot",
-			"agent.send",
-			"send",
-			"firebaseURLParamsTable",
-			"firebaseURLRoot",
-			"firebaseURLParamsString",
-			"firebaseUUID",
-			"tableDieEvent",
-			"fakeMillis",
-			"mapImpeeID_DieID",
-			"firebaseURLParamsTable",
-			"firebaseURLParamsString",
-			"uuid",
-			"fbUuidPrefix",
-			"firebaseUUID",
-			"firebaseURLRoot",
-			"auth",
-			"emRthqxr7UVV6Jw4SeEI9G65GA0CUXpfVN3eBoGO",
-			"firebaseURLParamsTable",
-			"firebaseURLParamsString",
-			"ubidots",
-			"getVBatt",
-			"firebaseURLParamsString",
-			"firebaseURLParamsTable"
+			"[^.]error\\("
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -297,15 +321,15 @@
 					"file": "CloudApp_CrispyHW_Agent.nut",
 					"settings":
 					{
-						"buffer_size": 6948,
+						"buffer_size": 6949,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1104,
-								1104
+								4039,
+								4039
 							]
 						],
 						"settings":
@@ -315,7 +339,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 548.0,
+						"translation.y": 2457.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -331,7 +355,7 @@
 					"file": "ThingApp_CrispyHW_Device.nut",
 					"settings":
 					{
-						"buffer_size": 6817,
+						"buffer_size": 8073,
 						"regions":
 						{
 						},
@@ -339,7 +363,7 @@
 						[
 							[
 								0,
-								6817
+								8073
 							]
 						],
 						"settings":
@@ -349,7 +373,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 3560.0,
+						"translation.y": 660.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -385,7 +409,7 @@
 		"cols":
 		[
 			0.0,
-			0.429681213246,
+			0.5,
 			1.0
 		],
 		"rows":

@@ -1,41 +1,43 @@
 (function Viz() {
+'use strict'
+////////////////////////////////////////////////////////////////////////////////
+// C.R.I.S.P.Y. Hardware Debug Viewer
+//   View logs from UART inputs of electricimp module
+////////////////////////////////////////////////////////////////////////////////
 
-"use strict"
-"2014-04-12a"
+// human readable version of this script
+var scriptVersion = 'CrispyViz.js v2014-05-08a'
 
-var refThingstreamServer = 'https://crispy-thingstream-name-server.firebaseio.com' // URL of the firebase
-var d3SelViz = d3.selectAll('#Viz') // DOM element that holds all visualizations
-var d3SelLog = d3.selectAll('.pageLog') // DOM element for log messages
-var d3SelButtons // DOM element for Buttons
-var d3SelThingVizs // DOM element for all ThingStream Visualizations
-var TEXT_HEIGHT = 16 // default guess, this is updated later in page load
-var estimatedServerTimeOffset = 0 // milliseconds
-var refServerTimeOffset = new Firebase(fbUrl([
-		refThingstreamServer, '.info', 'serverTimeOffset'
-	]))
-var refAllStreamInfoByUuid = new Firebase(fbUrl([
-		refThingstreamServer,	'allStreamInfoByUuid'
-	]))
-var refAllThingInfoByUuid = new Firebase(fbUrl([
-		refThingstreamServer,	'allThingInfoByUuid'
-	]))
+var tsnsURL = 'https://crispy-thingstream-name-server.firebaseio.com' // URL of the firebase
+var vizD3Sel = d3.selectAll('#Viz') // DOM element that holds all visualizations
+var logD3Sel = d3.selectAll('#Log') // DOM element for log messages
+var buttonsD3Sel // DOM element for Buttons
+var thingVizsD3Sel // DOM element for all ThingStream Visualizations
+var TEXT_HEIGHT = 18 // default guess, this is updated later in page load
+var serverTimeOffset = 0 // milliseconds
+var serverTimeOffsetRef = new Firebase([
+		tsnsURL, '.info', 'serverTimeOffset'].join('/'))
+var allStreamInfoByUuidRef = new Firebase([
+		tsnsURL, 'allStreamInfoByUuid'].join('/'))
+var allThingInfoByUuidRef = new Firebase([
+		tsnsURL, 'allThingInfoByUuid'].join('/'))
 var allVizRefArraysByThingUuid = {} // save refs globally for cleanup when removed
 var allVizd3SelArraysByThingUuid = {} // save dom elements globally for cleanup when removed
 var debugLogVizInfo = { // TODO: get these *Info objects from cloud Viz name-server
-		limit : 50,
+		limit : 5000,
 		title : 'Debug Log from UART A (imp pin 7)',
 		VizName : 'debugLog',
 		VizTitle : 'debugLogTitle'
 	}
 var debugLogVizInfoB = { // TODO: get these *Info objects from cloud Viz name-server
-		limit : 50,
+		limit : 5000,
 		title : 'Debug Log from UART B (imp pin 9)',
 		VizName : 'debugLogB',
 		VizTitle : 'debugLogBTitle'
 	}
 
 function serverNow() {
-	return new Date().getTime() + estimatedServerTimeOffset
+	return new Date().getTime() + serverTimeOffset
 }
 
 function fbUrl(pathArray) { // helper to construct URL from list of path parts
@@ -214,7 +216,7 @@ function onValueDebugLog(snap) {
 
 function addVizListFromThis() {
 	console.log('addVizListFromThis : ' + this.streamUuid)
-	refAllStreamInfoByUuid
+	allStreamInfoByUuidRef
 	.child(this.streamUuid)
 	.child('allSessionsRef')
 	.once(
@@ -276,7 +278,7 @@ function addVizFromThingUuid(thingUuid, info) {
 
 	// add Name
 	context.d3SelThing =
-		d3SelThingVizs // cache <div> element for this thingUuid
+		thingVizsD3Sel // cache <div> element for this thingUuid
 			.append('div')
 			.attr({
 				thingUuid : thingUuid,
@@ -293,7 +295,7 @@ function addVizFromThingUuid(thingUuid, info) {
 	context.d3SelThing.select('[name=thingName]')
 		.text(info.name || thingUuid)
 
-	refAllOutStreamUuidsByName = refAllThingInfoByUuid.child(thingUuid).child('allOutStreamUuidsByName')
+	refAllOutStreamUuidsByName = allThingInfoByUuidRef.child(thingUuid).child('allOutStreamUuidsByName')
 	allVizRefArraysByThingUuid[thingUuid].push(refAllOutStreamUuidsByName)
 
 	refAllOutStreamUuidsByName
@@ -336,42 +338,44 @@ function addVizFromThingUuid(thingUuid, info) {
 } // addVizFromThingUuid(...
 
 // code starts here
-TEXT_HEIGHT = d3SelLog.select('.loadMessage').node().getBoundingClientRect().height
+logD3Sel.append('div').text(scriptVersion)
+
+TEXT_HEIGHT = parseInt(logD3Sel.select('div').style('line-height'), 10) - 2 // HACK: '- 2' is a fudge
+// FIXME: sometimes on page load the height is stll 0.  Maybe make an on resize event for this div to reset lineHeightGLobal?
 console.log('TEXT_HEIGHT set to ' + TEXT_HEIGHT)
 
+logD3Sel.append('div').text('Loading Firebase...')
+
 // start getting data from Firebase here
-d3SelLog.selectAll('.loadMessage')
+logD3Sel.selectAll('.loadMessage')
 	.text('Loading Firebase...')
 
-refServerTimeOffset.on(
-	'value',
-	function(snap) {
-		var dom
+serverTimeOffsetRef.on('value', function (snap) {
+// minimal effort here to sync local time and server time.
+	var d3Sel = logD3Sel.selectAll('.fbLoadMessage')
+		.data([true]) // FIXME: is there a better way?
 
-		estimatedServerTimeOffset = snap.val()
-		d3SelLog.selectAll('.loadMessage')
-			.text('>Firebase Loaded.\r\n')
-		dom = d3SelLog
-			.selectAll('.estimatedServerTimeOffset')
-		if (true || !dom.node()) { //FIXME: remove true ||
-			dom = d3SelLog.append('span')
-				.attr({class : 'estimatedServerTimeOffset'})
-		}
-		dom.text(
-			'estimatedServerTimeOffset = '
-			+ estimatedServerTimeOffset + 'ms, '
-		)
-	},
-	function cancelCallback() {console.log('refServerTimeOffset callback canceled')}, // just being paranoid
-	this // redundant
-)
+	// data here
+	serverTimeOffset = snap.val() // change global time offset
+	
+	// presentation part here.  TODO: seperate data and presentation?
+	d3Sel.enter()	
+		.append('div').attr({ class : 'fbLoadMessage' })
+	d3Sel
+		// .style({'background-color': firebaseColor.changed})
+		.style({'background-color' : 'limegreen'})
+		.text('>Firebase Loaded. (serverTimeOffset = '
+			+ serverTimeOffset + 'ms)')
+		.transition().ease('linear').duration(333)
+		.style({'background-color' : 'white'})
+})
 
-refAllThingInfoByUuid.on(
+allThingInfoByUuidRef.on(
 	'value',
 	function(snap) {
 		// clear existing
-		d3SelViz.selectAll('*').remove()
-		d3SelButtons = d3SelViz
+		vizD3Sel.selectAll('*').remove()
+		buttonsD3Sel = vizD3Sel
 			.append('div')
 			.attr({
 				class : 'panel panel-default col-12'
@@ -381,7 +385,7 @@ refAllThingInfoByUuid.on(
 				class : 'panel-body btn-group',
 				name : 'buttonContainer'
 			})
-		d3SelThingVizs = d3SelViz
+		thingVizsD3Sel = vizD3Sel
 			.append('div')
 			.attr({
 				name : 'thingUuidContainer'
@@ -392,7 +396,7 @@ refAllThingInfoByUuid.on(
 		// add new Viz for each thingUuid	
 		for (var thingUuid in snap.val()) {
 			var info = snap.val()[thingUuid]
-			d3SelButtons
+			buttonsD3Sel
 				.append('button')
 				.attr({
 					thingUuid : thingUuid,
@@ -413,6 +417,6 @@ refAllThingInfoByUuid.on(
 				})
 		}
 	}
-)//refAllThingInfoByUuid.on('value'...
+)//allThingInfoByUuidRef.on('value'...
 
 }) ()

@@ -5,7 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy hardware v00.01.2014-05-05b"
+const versionString = "crispy hardware v00.01.2014-05-08a"
 impeeID <- hardware.getimpeeid() // cache the impeeID FIXME: is this necessary for speed?
 offsetMicros <- 0 // set later to microsseconds % 1000000 when time() rolls over //FIXME: need a better timesync solution here
 const sleepforTimeoutSecs = 60 // seconds idle before decrementing idleCount
@@ -30,17 +30,15 @@ serialPortB_RX <- hardware.pin9
 
 // start with generic functions
 function timestamp() {
-    local t, t2, m, m2
-    t = time()
-    m = hardware.micros() // CONSTRAINT: t= and m= should be atomic but aren't
+    local t, t2, m
+    t = time() // CONSTRAINT: t= and m= should be atomic but aren't
     t2 = time()
-    m2 = hardware.micros()
+    m = hardware.micros()
     if (t2 > t) { // check if time() seconds rolled over
-        offsetMicros = m2 % 1000000// re-calibrate offsetMicros
+        offsetMicros = m % 1000000// re-calibrate offsetMicros
         if (offsetMicros < 0) {
             offsetMicros += 1000000 // Squirrel mod is remainder, not modulos
         }
-        m = m2
         m = (m - offsetMicros) % 1000000
         if (m < 0) {
             m += 1000000 // Squirrel mod is remainder, not modulos
@@ -182,17 +180,23 @@ Enabling power-save mode drops this down to < 5mA when the radio is idle (i.e., 
 server.log("BOOTING " + versionString + " deviceId=" + hardware.getdeviceid() + " MAC:" + imp.getmacaddress())
 server.log("imp software version : " + imp.getsoftwareversion())
 server.log("connected to WiFi : " + imp.getbssid())
+server.log("____ -300 % 1000000 = " + -300 % 1000000)
 
 // BUGBUG: below needed until newer firmware!?  See http://forums.electricimp.com/discussion/comment/4875#Comment_2714
 // imp.enableblinkup(true)
 
-lastUTCSeconds <- time()
-while(lastUTCSeconds == time()) {
-} // wait for seonds to roll over
+lastUTCSeconds <- 0
+newSeconds <- time()
+do {
+    lastUTCSeconds = newSeconds
+    newSeconds = time()
+    offsetMicros = hardware.micros()
+} while (newSeconds == lastUTCSeconds) // wait for seonds to roll over
 offsetMicros = hardware.micros() % 1000000
 if (offsetMicros < 0) {
     offsetMicros += 1000000 // Squirrel mod is remainder, not modulos
 }
+lastUTCSeconds = newSeconds
 lastMicros <- offsetMicros
 
 // this re-calibrates if timestamp() is read at a seonds rollover
