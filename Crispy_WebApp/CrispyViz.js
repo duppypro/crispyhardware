@@ -6,7 +6,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 // human readable version of this script
-var scriptVersion = 'CrispyViz.js v2014-05-08a'
+var scriptVersion = 'CrispyViz.js v2014-05-08c'
 
 var tsnsURL = 'https://crispy-thingstream-name-server.firebaseio.com' // URL of the firebase
 var vizD3Sel = d3.selectAll('#Viz') // DOM element that holds all visualizations
@@ -96,19 +96,19 @@ function appendList(d3Selection, info) {
 	sel = d3Selection
 		.append('div')
 		.attr({
-			class : 'col-6'
+			class : 'col-sm-12'
 		})
 	sel
 		.append('div')
 		.attr({
 			name : info.VizTitle,
-			class : 'col-6 text-center'
+			class : 'col-sm-12 text-center'
 		})
 	sel
 		.append('div')		
 		.attr({
 			name : info.VizName,
-			class : 'col-6',
+			class : 'col-sm-12',
 			style : 'resize:vertical;overflow:auto;height:248px'
 		})
 }
@@ -239,7 +239,6 @@ function addVizListFromThis() {
 					}
 					refAllItems = new Firebase(obj['__REF__'])
 					allVizRefArraysByThingUuid[this.thingUuid].push(refAllItems)
-					console.log("Match? " + this.streamUuid + " and " + this.onValueFunction)
 					refAllItems
 					.endAt()
 					.limit(this.info.limit)
@@ -282,7 +281,7 @@ function addVizFromThingUuid(thingUuid, info) {
 			.append('div')
 			.attr({
 				thingUuid : thingUuid,
-				class : 'panel panel-default col-12'
+				class : 'panel panel-default col-sm-12'
 			})
 	allVizd3SelArraysByThingUuid[thingUuid].push(context.d3SelThing)
 	
@@ -378,7 +377,7 @@ allThingInfoByUuidRef.on(
 		buttonsD3Sel = vizD3Sel
 			.append('div')
 			.attr({
-				class : 'panel panel-default col-12'
+				class : 'panel panel-default col-sm-12'
 			})
 			.append('div')
 			.attr({
@@ -400,8 +399,8 @@ allThingInfoByUuidRef.on(
 				.append('button')
 				.attr({
 					thingUuid : thingUuid,
-					style : 'margin : 0px 2px;',
-					class : 'btn-small col-4'
+					// style : 'margin : 0px 2px;',
+					class : 'btn-small col-sm-3'
 				})
 				.text(info.name || thingUuid)
 				.on('click', function() {
