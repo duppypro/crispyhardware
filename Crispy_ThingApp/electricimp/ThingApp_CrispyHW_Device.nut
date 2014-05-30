@@ -5,7 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy hardware v00.01.2014-05-08a"
+const versionString = "crispy hardware v00.01.2014-05-30a"
 impeeID <- hardware.getimpeeid() // cache the impeeID FIXME: is this necessary for speed?
 offsetMicros <- 0 // set later to microsseconds % 1000000 when time() rolls over //FIXME: need a better timesync solution here
 const sleepforTimeoutSecs = 60 // seconds idle before decrementing idleCount
@@ -32,22 +32,26 @@ serialPortB_RX <- hardware.pin9
 function timestamp() {
     local t, t2, m
     t = time() // CONSTRAINT: t= and m= should be atomic but aren't
-    t2 = time()
     m = hardware.micros()
+    t2 = time()
+    // m might be negative, make it not so
+    if (m < 0) {
+        m = (m % 1073741824) + 1073741824
+    }
     if (t2 > t) { // check if time() seconds rolled over
         offsetMicros = m % 1000000// re-calibrate offsetMicros
-        if (offsetMicros < 0) {
-            offsetMicros += 1000000 // Squirrel mod is remainder, not modulos
-        }
-        m = (m - offsetMicros) % 1000000
-        if (m < 0) {
-            m += 1000000 // Squirrel mod is remainder, not modulos
-        }
+        // if (offsetMicros < 0) {
+        //     offsetMicros += 1000000 // Squirrel mod is remainder, not modulos
+        // }
+        m = (m + 1000000 - offsetMicros) % 1000000
+        // if (m < 0) {
+        //     m += 1000000 // Squirrel mod is remainder, not modulos
+        // }
     } else {
-        m = (m - offsetMicros) % 1000000
-        if (m < 0) {
-            m += 1000000 // Squirrel mod is remainder, not modulos
-        }
+        m = (m + 1000000 - offsetMicros) % 1000000
+        // if (m < 0) {
+        //     m += 1000000 // Squirrel mod is remainder, not modulos
+        // }
         if (m < lastMicros && lastUTCSeconds == t2) {
             // we rolled over and didn't catch it
             t2 = t2 + 1

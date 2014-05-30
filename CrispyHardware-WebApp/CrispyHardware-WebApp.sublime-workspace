@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"server",
+				"serverTimeOffset"
+			],
+			[
 				"tabl",
 				"tableDieEvent"
 			],
@@ -35,7 +39,7 @@
 			"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/index.html",
 			"settings":
 			{
-				"buffer_size": 1442,
+				"buffer_size": 1308,
 				"line_ending": "Unix"
 			}
 		},
@@ -43,7 +47,7 @@
 			"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/CrispyViz.js",
 			"settings":
 			{
-				"buffer_size": 11531,
+				"buffer_size": 12079,
 				"line_ending": "Unix"
 			}
 		}
@@ -121,6 +125,23 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"12",
+			"col-sm-6",
+			"col-xs",
+			"xs",
+			"col-lg",
+			"col-sm",
+			"col-",
+			"fbUrl",
+			"refAllThingInfoByUuid",
+			"refAllStreamInfoByUuid",
+			"refServerTimeOffset",
+			"estimatedServerTimeOffset",
+			"d3SelThingVizs",
+			"d3SelButtons",
+			"d3SelLog",
+			"d3SelViz",
+			"refThingstreamServer",
 			"redrawList",
 			"redrawDebugLog",
 			"onValueDebugLog",
@@ -231,19 +252,7 @@
 			"agent",
 			"date",
 			"millis",
-			"ubi",
-			"offsetMilliseconds",
-			"estimate",
-			"estimatedUTCMilliseconds",
-			"es",
-			"estimatedUTCMilliseconds",
-			"local",
-			"data-by-session",
-			": {: {",
-			": {",
-			"\" :",
-			"maxG",
-			"fullScale"
+			"ubi"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -272,15 +281,15 @@
 					"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/index.html",
 					"settings":
 					{
-						"buffer_size": 1442,
+						"buffer_size": 1308,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1221,
-								1221
+								1308,
+								1308
 							]
 						],
 						"settings":
@@ -294,27 +303,21 @@
 						"zoom_level": 1.0
 					},
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 1,
 					"file": "/Users/duppy/Dropbox/GitHub/crispyhardware/Crispy_WebApp/CrispyViz.js",
 					"settings":
 					{
-						"buffer_size": 11531,
+						"buffer_size": 12079,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4166,
-								4166
+								3481,
+								3481
 							]
 						],
 						"settings":
@@ -328,7 +331,7 @@
 							"wrap_width": 120
 						},
 						"translation.x": 0.0,
-						"translation.y": 2598.0,
+						"translation.y": 1766.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -353,18 +356,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.235086439403,
 			1.0
 		],
 		"rows":

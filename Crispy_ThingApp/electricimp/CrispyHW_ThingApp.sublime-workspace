@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"newSeconds"
+			],
+			[
 				"las",
 				"lastUTCSeconds"
 			],
@@ -79,7 +83,7 @@
 			"file": "CloudApp_CrispyHW_Agent.nut",
 			"settings":
 			{
-				"buffer_size": 6949,
+				"buffer_size": 7122,
 				"line_ending": "Unix"
 			}
 		},
@@ -87,7 +91,7 @@
 			"file": "ThingApp_CrispyHW_Device.nut",
 			"settings":
 			{
-				"buffer_size": 8073,
+				"buffer_size": 8225,
 				"line_ending": "Unix"
 			}
 		}
@@ -165,6 +169,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"timestamp",
+			"fakeMillis",
+			"lastMicros",
+			"while",
+			"for ",
+			"for\\(",
+			"for",
 			"lastMicros",
 			"+= 10000",
 			"putstream",
@@ -285,14 +296,7 @@
 			"CTRL_REG1",
 			"CTRL_REG2",
 			"server.log",
-			"fbRoot",
-			"server.log",
-			"tsRoot",
-			"fbUuid",
-			"fbRoot",
-			"log(",
-			"[^.]log\\(",
-			"[^.]error\\("
+			"fbRoot"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -321,15 +325,15 @@
 					"file": "CloudApp_CrispyHW_Agent.nut",
 					"settings":
 					{
-						"buffer_size": 6949,
+						"buffer_size": 7122,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4039,
-								4039
+								942,
+								942
 							]
 						],
 						"settings":
@@ -339,7 +343,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2457.0,
+						"translation.y": 775.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -355,15 +359,15 @@
 					"file": "ThingApp_CrispyHW_Device.nut",
 					"settings":
 					{
-						"buffer_size": 8073,
+						"buffer_size": 8225,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								8073
+								323,
+								323
 							]
 						],
 						"settings":
@@ -373,7 +377,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 660.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
