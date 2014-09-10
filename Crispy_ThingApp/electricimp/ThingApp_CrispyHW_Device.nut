@@ -5,7 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy hardware v00.01.2014-05-30a"
+const versionString = "crispy hardware v00.01.2014-06-12a"
 impeeID <- hardware.getimpeeid() // cache the impeeID FIXME: is this necessary for speed?
 offsetMicros <- 0 // set later to microsseconds % 1000000 when time() rolls over //FIXME: need a better timesync solution here
 const sleepforTimeoutSecs = 60 // seconds idle before decrementing idleCount

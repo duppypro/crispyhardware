@@ -91,7 +91,7 @@
 			"file": "ThingApp_CrispyHW_Device.nut",
 			"settings":
 			{
-				"buffer_size": 8225,
+				"buffer_size": 8380,
 				"line_ending": "Unix"
 			}
 		}
@@ -343,7 +343,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 775.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -359,15 +359,15 @@
 					"file": "ThingApp_CrispyHW_Device.nut",
 					"settings":
 					{
-						"buffer_size": 8225,
+						"buffer_size": 8380,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								323,
-								323
+								0,
+								8380
 							]
 						],
 						"settings":

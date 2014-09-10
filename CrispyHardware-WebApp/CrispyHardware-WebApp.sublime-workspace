@@ -273,7 +273,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -316,8 +316,8 @@
 						"selection":
 						[
 							[
-								3481,
-								3481
+								30,
+								30
 							]
 						],
 						"settings":
@@ -331,7 +331,7 @@
 							"wrap_width": 120
 						},
 						"translation.x": 0.0,
-						"translation.y": 1766.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
