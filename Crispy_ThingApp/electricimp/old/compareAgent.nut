@@ -5,7 +5,7 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy v00.01.2016-04-30a"
+const versionString = "crispy v00.01.2014-05-08a"
 
 ///////////////////////////////////////////////
 // constants for Firebase
@@ -53,8 +53,8 @@ function putStreamValue(table, timeKey) {
     foreach (key, obj in table) {
         if (key in refBigDataByName) {
             // server.log("putStreamValue " + key + " @" + timeKey)
-            // server.log("PUT " + refBigDataByName[key] + "/" + timeKey + "/.json")
-            // server.log(http.jsonencode(obj))
+             server.log("PUT " + refBigDataByName[key] + "/" + timeKey + "/.json")
+             server.log(http.jsonencode(obj))
             http.request(
                 "PUT",
                 refBigDataByName[key] + "/" + timeKey + "/.json",

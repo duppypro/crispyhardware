@@ -5,11 +5,11 @@
 // global constants and variables
 
 // generic
-const versionString = "crispy hardware v00.01.2016-04-30a"
+const versionString = "crispy hardware v00.01.2015-08-14a"
 impeeID <- hardware.getimpeeid() // cache the impeeID FIXME: is this necessary for speed?
 offsetMicros <- 0 // set later to microsseconds % 1000000 when time() rolls over //FIXME: need a better timesync solution here
-const sleepforTimeoutSecs = 30 // seconds idle before decrementing idleCount
-const idleCountMaxTimeouts = 120 //3 // number sleepforTimeoutSecs periods before server.sleepfor()
+const sleepforTimeoutSecs = 60 // seconds idle before decrementing idleCount
+const idleCountMaxTimeouts = 22 //3 // number sleepforTimeoutSecs periods before server.sleepfor()
 const sleepforDurationSecs = 10800//10800 == 3hrs //300 // seconds to stay in deep sleep (wakeup is a reboot)
 idleCount <- idleCountMaxTimeouts // Current count of idleCountMaxTimeouts timer
 
@@ -73,11 +73,10 @@ function checkActivity() {
     agent.send(
         "event",
         {
-            /*"healthStatus" : {
+            "healthStatus" : {
                 "keepAlive": idleCount,
                 // "vBattPin": getVBatt(),
-            },*/
-            "debugLogB" : "keepAlive" + idleCount,
+            },
             "t" : timestamp(),
         }
     )
@@ -211,8 +210,8 @@ server.log("offsetMicros = " + offsetMicros)
 serialStringMaxLength <- 80
 serialString <- blob(0)
 seriialLastTime <- timestamp()
-serialPort.configure(115200, 8, PARITY_NONE, 1, NO_CTSRTS, readSerialPort)
-serialPortB.configure(115200, 8, PARITY_NONE, 1, NO_CTSRTS, readSerialPortB)
+serialPort.configure(230400, 8, PARITY_NONE, 1, NO_CTSRTS, readSerialPort)
+serialPortB.configure(230400, 8, PARITY_NONE, 1, NO_CTSRTS, readSerialPortB)
 
 agent.send(
     "event",

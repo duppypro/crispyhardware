@@ -1,0 +1,80 @@
+{
+  "crispy-impv00-H6LfA48Gcqds" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-H6LfA48Gcqds",
+      "debugLogB" : "debugLogB-crispy-impv00-H6LfA48Gcqds",
+      "healthStatus" : "healthStatus-crispy-impv00-H6LfA48Gcqds"
+    },
+    "name" : "CrispyHW ProtoTank 001",
+    "readme" : "Crispy HW\r\nThis is a Prototype for Loopd.",
+    "thingUuid" : "crispy-impv00-H6LfA48Gcqds"
+  },
+  "crispy-impv00-HOThmJ2eTXuK" : {
+    "allOutStreamUuidsByName" : {
+      "healthStatus" : "healthStatus-crispy-impv00-HOThmJ2eTXuK",
+      "scanResponseBLE" : "scanResponseBLE-crispy-impv00-HOThmJ2eTXuK"
+    },
+    "name" : "CrispyHW BLE 001",
+    "readme" : "Crispy HW\r\nThis is a Prototype BLE Scanner.",
+    "thingUuid" : "crispy-impv00-HOThmJ2eTXuK"
+  },
+  "crispy-impv00-hDzxieGblkLa" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-hDzxieGblkLa",
+      "debugLogB" : "debugLogB-crispy-impv00-hDzxieGblkLa",
+      "healthStatus" : "healthStatus-crispy-impv00-hDzxieGblkLa"
+    },
+    "name" : "CrispyHW Loopd 002",
+    "readme" : "Crispy HW\r\nThis is a Prototype for Loopd.",
+    "thingUuid" : "crispy-impv00-hDzxieGblkLa"
+  },
+  "crispy-impv00-nroZup2fUYkY" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-nroZup2fUYkY",
+      "healthStatus" : "healthStatus-crispy-impv00-nroZup2fUYkY"
+    },
+    "name" : "CrispyHW Duppy 000",
+    "readme" : "Crispy HW\r\nThis is a Prototype for Jasjeet.",
+    "thingUuid" : "crispy-impv00-nroZup2fUYkY"
+  },
+  "crispy-impv00-t1-GAAqyLtCy" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-t1-GAAqyLtCy",
+      "debugLogB" : "debugLogB-crispy-impv00-t1-GAAqyLtCy",
+      "healthStatus" : "healthStatus-crispy-impv00-t1-GAAqyLtCy"
+    },
+    "name" : "CrispyHW Duppy ___",
+    "readme" : "Crispy HW\r\nThis is a Prototype for Senstream.",
+    "thingUuid" : "crispy-impv00-t1-GAAqyLtCy"
+  },
+  "crispy-impv00-ul-myC18FWrm" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-ul-myC18FWrm",
+      "debugLogB" : "debugLogB-crispy-impv00-ul-myC18FWrm",
+      "healthStatus" : "healthStatus-crispy-impv00-ul-myC18FWrm"
+    },
+    "name" : "CrispyHW ProtoTank 004",
+    "readme" : "Crispy HW\r\nThis is a Prototype for Loopd.",
+    "thingUuid" : "crispy-impv00-ul-myC18FWrm"
+  },
+  "crispy-impv00-jsmyVbQpjZ0I" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-jsmyVbQpjZ0I",
+      "debugLogB" : "debugLogB-crispy-impv00-jsmyVbQpjZ0I",
+      "healthStatus" : "healthStatus-crispy-impv00-jsmyVbQpjZ0I"
+    },
+    "name" : "CrispyHW HerdDogg",
+    "readme" : "Crispy HW\r\nHerdDogg for DoggBone dev.",
+    "thingUuid" : "crispy-impv00-jsmyVbQpjZ0I"
+  },
+  "crispy-impv00-zX5BP6I2r7EW" : {
+    "allOutStreamUuidsByName" : {
+      "debugLog" : "debugLog-crispy-impv00-zX5BP6I2r7EW",
+      "debugLogB" : "debugLogB-crispy-impv00-zX5BP6I2r7EW",
+      "healthStatus" : "healthStatus-crispy-impv00-zX5BP6I2r7EW"
+    },
+    "name" : "CrispyHW Duppy 002",
+    "readme" : "Crispy HW\r\nThis is a Prototype for Senstream.",
+    "thingUuid" : "crispy-impv00-zX5BP6I2r7EW"
+  }
+}

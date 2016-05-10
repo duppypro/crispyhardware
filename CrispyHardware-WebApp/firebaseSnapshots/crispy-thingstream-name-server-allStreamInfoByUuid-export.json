@@ -1,0 +1,182 @@
+{
+  "debugLog-crispy-impv00-jsmyVbQpjZ0I" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-jsmyVbQpjZ0I",
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "thingUuid" : "crispy-impv00-jsmyVbQpjZ0I",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLogB-crispy-impv00-jsmyVbQpjZ0I" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLogB-crispy-impv00-jsmyVbQpjZ0I",
+    "name" : "debugLogB",
+    "readme" : "Each entry of this stream is a string representing the last debugLogB full line entered.",
+    "thingUuid" : "crispy-impv00-jsmyVbQpjZ0I",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-jsmyVbQpjZ0I" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-jsmyVbQpjZ0I",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-jsmyVbQpjZ0I",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLog-crispy-impv00-H6LfA48Gcqds" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-H6LfA48Gcqds",
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "thingUuid" : "crispy-impv00-H6LfA48Gcqds",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLog-crispy-impv00-hDzxieGblkLa" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-hDzxieGblkLa",
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "thingUuid" : "crispy-impv00-hDzxieGblkLa",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLog-crispy-impv00-t1-GAAqyLtCy" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-t1-GAAqyLtCy",
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "thingUuid" : "crispy-impv00-t1-GAAqyLtCy",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLog-crispy-impv00-ul-myC18FWrm" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-ul-myC18FWrm",
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "thingUuid" : "crispy-impv00-ul-myC18FWrm",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLog-crispy-impv00-zX5BP6I2r7EW" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLog-crispy-impv00-zX5BP6I2r7EW",
+    "name" : "debugLog",
+    "readme" : "Each entry of this stream is a string representing the last debugLog full line entered.",
+    "thingUuid" : "crispy-impv00-zX5BP6I2r7EW",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLogB-crispy-impv00-H6LfA48Gcqds" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLogB-crispy-impv00-H6LfA48Gcqds",
+    "name" : "debugLogB",
+    "readme" : "Each entry of this stream is a string representing the last debugLogB full line entered.",
+    "thingUuid" : "crispy-impv00-H6LfA48Gcqds",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLogB-crispy-impv00-hDzxieGblkLa" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLogB-crispy-impv00-hDzxieGblkLa",
+    "name" : "debugLogB",
+    "readme" : "Each entry of this stream is a string representing the last debugLogB full line entered.",
+    "thingUuid" : "crispy-impv00-hDzxieGblkLa",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLogB-crispy-impv00-t1-GAAqyLtCy" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLogB-crispy-impv00-t1-GAAqyLtCy",
+    "name" : "debugLogB",
+    "readme" : "Each entry of this stream is a string representing the last debugLogB full line entered.",
+    "thingUuid" : "crispy-impv00-t1-GAAqyLtCy",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLogB-crispy-impv00-ul-myC18FWrm" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLogB-crispy-impv00-ul-myC18FWrm",
+    "name" : "debugLogB",
+    "readme" : "Each entry of this stream is a string representing the last debugLogB full line entered.",
+    "thingUuid" : "crispy-impv00-ul-myC18FWrm",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "debugLogB-crispy-impv00-zX5BP6I2r7EW" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/debugLogB-crispy-impv00-zX5BP6I2r7EW",
+    "name" : "debugLogB",
+    "readme" : "Each entry of this stream is a string representing the last debugLogB full line entered.",
+    "thingUuid" : "crispy-impv00-zX5BP6I2r7EW",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-H6LfA48Gcqds" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-H6LfA48Gcqds",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-H6LfA48Gcqds",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-HOThmJ2eTXuK" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-HOThmJ2eTXuK",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-HOThmJ2eTXuK",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-hDzxieGblkLa" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-hDzxieGblkLa",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-hDzxieGblkLa",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-t1-GAAqyLtCy" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-t1-GAAqyLtCy",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-t1-GAAqyLtCy",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-ul-myC18FWrm" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-ul-myC18FWrm",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-ul-myC18FWrm",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "healthStatus-crispy-impv00-zX5BP6I2r7EW" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/healthStatus-crispy-impv00-zX5BP6I2r7EW",
+    "name" : "healthStatus",
+    "readme" : "Each entry of this stream is an object with health data such as battery level.",
+    "thingUuid" : "crispy-impv00-zX5BP6I2r7EW",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  },
+  "scanResponseBLE-crispy-impv00-HOThmJ2eTXuK" : {
+    "allSessionsRef" : "https://crispy-thingstream-name-server.firebaseio.com/allSessionsUrl/allSessionsByStreamUuid/scanResponseBLE-crispy-impv00-HOThmJ2eTXuK",
+    "name" : "scanResponseBLE",
+    "readme" : "Each entry of this stream is a string representing the last scanResponseBLE.",
+    "thingUuid" : "crispy-impv00-HOThmJ2eTXuK",
+    "ticksPerSecond" : 1000,
+    "timeOffset" : "absolute",
+    "typeUuid" : "IACrispyHw-string-v0-0-0"
+  }
+}
