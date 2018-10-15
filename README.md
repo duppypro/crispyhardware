@@ -11,7 +11,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <p><span>I want to share a method that I teach and use to reduce this frustration. &nbsp;This is a checklist that y<span>ou</span> can remember using the <span>cutesy</span> mnemonic device 'CRISPY'. &nbsp;</span></p>
 <p>The CRISPY checklist is:</p>
 <ul>
-<li><span style="font-weight: bold; text-decoration: underline;">C</span>locks</li>
+<li><strong><span style="font-weight: bold; text-decoration: underline;">C</span></strong>locks</li>
 <li><strong><span style="text-decoration: underline;">R</span></strong><span><span>eset</span></span></li>
 <li><strong><span style="text-decoration: underline;">I</span></strong><span><span>ntegrity</span> of </span><span style="text-decoration: underline;"><strong>S</strong></span><span><span>ignals</span></span></li>
 <li><span style="text-decoration: underline;"><strong>P</strong></span><span><span>ower</span></span></li>
@@ -115,7 +115,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li><span style="text-decoration: underline;">Do your pin numbers defined in your firmware match the schematic?</span></li>
 <li><span style="text-decoration: underline;">Are you using the right regster addresses? &nbsp;Are you accessing them as 16bit when they are only 8bit?</span></li>
 <li><span style="text-decoration: underline;">Does the PCB as built match the schematic? &nbsp; Version control is not used as well as often in hobby hardware development as it is in software development. &nbsp;It should be.</span></li>
-<li><span style="text-decoration: underline;">Is your scope or multimeter connected to the write pin? &nbsp;Pin one labeling can often be confusing and it can be hard to count fine pitch pins. &nbsp;Use labeled test points. &nbsp;Don't skimp on annotating your silk screen or use different color breadboard wires in some consistent manner such as red for power, black for ground, blue for IOs, green for clocks.</span></li>
+<li><span style="text-decoration: underline;">Is your scope or multimeter connected to the right pin? &nbsp;Pin one labeling can often be confusing and it can be hard to count fine pitch pins. &nbsp;Use labeled test points. &nbsp;Don't skimp on annotating your silk screen or use different color breadboard wires in some consistent manner such as red for power, black for ground, blue for IOs, green for clocks.</span></li>
 <li><span style="text-decoration: underline;">Are you assuming a pin is active high when it is relaly active low?</span></li>
 <li><span style="text-decoration: underline;">Are your clocks rising or falling edge?</span></li>
 <li><span style="text-decoration: underline;">If you have a serial bus is it sending LSB or MSB first?</span></li>
