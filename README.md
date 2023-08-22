@@ -7,7 +7,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 
 <p>&nbsp;</p>
 <p>Debugging digital hardware design is not the same as debugging software.</p>
-<p>You may have very strong software debugging skills. &nbsp;But I have found that those skills assume that the design is behaving as a digital system. &nbsp;If your hardware design has bugs at the analog level it can cause the digital behavior to appear unpredictable. &nbsp;This behavior and can be very frustrating to debug.</p>
+<p>You may have very strong software debugging skills. &nbsp;But I have found that those skills assume that the design is behaving as a digital system. &nbsp;If your hardware design has bugs at the analog level, it can cause the digital behavior to appear unpredictable. &nbsp;This behavior can be very frustrating to debug.</p>
 <p><span>I want to share a method that I teach and use to reduce this frustration. &nbsp;This is a checklist that y<span>ou</span> can remember using the <span>cutesy</span> mnemonic device 'CRISPY'. &nbsp;</span></p>
 <p>The CRISPY checklist is:</p>
 <ul>
@@ -17,7 +17,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li><span style="text-decoration: underline;"><strong>P</strong></span><span><span>ower</span></span></li>
 <li><strong><span style="text-decoration: underline;">Y</span></strong><span><span>ou</span></span></li>
 </ul>
-<p><span>As the mnemonic does not list the items in the best order, I will explain each item below in the order I have found most useful. &nbsp;I will also be relatively brief in this post. &nbsp;If y<span>ou</span> have questions about terms I use or tools needed just ask @<span>duppy</span> on twitter #<span>crispyhw</span> tag. &nbsp;If y<span>ou</span> have better solutions or a problem whose fix did not fit into this checklist, <span>pelase</span> share on twitter @<span>duppy</span> #<span>crispyhw</span>. &nbsp;I'll bet somebody out there has an even better checklist than this one.</span></p>
+<p><span>As the mnemonic does not list the items in the best order, I will explain each item below in the order I have found most useful. &nbsp;I will also be relatively brief in this post. &nbsp;If y<span>ou</span> have questions about terms I use or tools needed just ask @<span>duppy</span> on twitter #<span>crispyhw</span> tag. &nbsp;If y<span>ou</span> have better solutions or a problem whose fix did not fit into this checklist, <span>please</span> share on twitter @<span>duppy</span> #<span>crispyhw</span>. &nbsp;I'll bet somebody out there has an even better checklist than this one.</span></p>
 <ul>
 <li><strong><span style="text-decoration: underline;">P</span></strong><span style="text-decoration: underline;"><span><span>ower</span></span></span> 
 <ul>
@@ -28,8 +28,8 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 </li>
 <li>Is your design plugged in?     
 <ul>
-<li>Seriously. &nbsp;Double check with a volt meter or LED.</li>
-<li>If battery powered, is the battery near full? &nbsp;I recommending replacing the battery with a bench supply while debugging.</li>
+<li>Seriously. &nbsp;Double check with a voltmeter or LED.</li>
+<li>If battery powered, is the battery near full? &nbsp;I recommend replacing the battery with a bench supply while debugging.</li>
 </ul>
 </li>
 <li>Are you using too much power?     
@@ -66,10 +66,10 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 </li>
 <li>Do you have more than one power domain?     
 <ul>
-<li><span><span>Remeber</span> that a debug or programming cable or connection to a PC may count as your second p<span>ower</span> domain.</span></li>
+<li><span><span>Remember</span> that a debug or programming cable or connection to a PC may count as your second p<span>ower</span> domain.</span></li>
 <li>Are all the power domains on?</li>
 <li>What order are the power domains turning on and off?</li>
-<li><span>Check for "<span>backdrive</span>". &nbsp;If an output from a powered <span>IC</span> or a pull-up resistor is driving a high input to an <span>IC</span> that is not powered then y<span>ou</span> are <span>backdriving</span> that <span>IC</span>. &nbsp;The <span>backdriven</span> <span>IC's</span> behavior can range from appearing to work as if powered properly to releasing smoke. &nbsp;The releasing smoke behavior is the easy bug to find. &nbsp;The other behaviors are harder. </span> 
+<li><span>Check for "<span>backdrive</span>". &nbsp;If an output from a powered <span>IC</span> or a pull-up resistor is driving a high input to an <span>IC</span> that is not powered, then y<span>ou</span> are <span>backdriving</span> that <span>IC</span>. &nbsp;The <span>backdriven</span> <span>IC's</span> behavior can range from appearing to work as if powered properly to releasing smoke. &nbsp;The releasing smoke behavior is the easy bug to find. &nbsp;The other behaviors are harder. </span> 
 <ul>
 <li><span>Can someone recommend a good reference for more on <span>backdrive</span>?</span></li>
 </ul>
@@ -94,10 +94,10 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 </li>
 <li><span style="text-decoration: underline;"><strong>C</strong>locks</span> 
 <ul>
-<li><span>Even if P<span>ower</span> and R<span>eset</span> are good, your <span>ICs</span> still don't work without a stable clock. &nbsp;Like r<span>eset</span>, many <span>ICs</span> these days have internal <span>oscilators</span> so y<span>ou</span> might have also been lured into skipping this step.</span></li>
+<li><span>Even if P<span>ower</span> and R<span>eset</span> are good, your <span>ICs</span> still don't work without a stable clock. &nbsp;Like r<span>eset</span>, many <span>ICs</span> these days have internal <span>oscillators</span> so you might have also been lured into skipping this step.</span></li>
 <li><span>Read the <span>datasheet</span> and make sure y<span>ou</span> are providing everything necessary for the internal clock to work or your external crystal or oscillator&nbsp;to start up.</span></li>
 <li><span>If y<span>ou</span> have multiple <span>ICs</span> with high speed clocks then y<span>ou</span> need to read up on jitter, skew, setup, hold, <span>metastability</span>, transmission line termination techniques, crosstalk, duty cycle, and probably a few other topics.</span></li>
-<li><span>I don't mean to scare y<span>ou</span>. &nbsp; If y<span>ou</span> are using <span>Arduino</span> or similar class micro based designs then high-speed clocks are probably not your problem. &nbsp; Learn enough to rule them out as a possible cause and look everywhere else first.</span></li>
+<li><span>I don't mean to scare y<span>ou</span>. &nbsp; If y<span>ou</span> are using <span>Arduino</span> or similar class micro based designs, then high-speed clocks are probably not your problem. &nbsp; Learn enough to rule them out as a possible cause and look everywhere else first.</span></li>
 </ul>
 </li>
 <li><span style="text-decoration: underline;"><strong>I</strong><span><span>ntegrity</span> of </span><strong>S</strong><span><span>ignals</span></span></span> 
@@ -105,7 +105,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li><span>This is more commonly called "Signal I<span>ntegrity</span>" when y<span>ou</span> aren't trying to make your checklist have a <span>cutesy</span> mnemonic.</span></li>
 <li>Know the speed of all your external signals and start with anything faster than 1MHz.</li>
 <li>Know which signals are edge vs. level sensitive. &nbsp;Level sensitive signals can look ugly as they change but must be stable around the setup and hold time of the receiving chip. Edge sensitive signals need to have clean changes and may need to be treated as <span style="text-decoration: underline;"><strong>C</strong>locks</span></li>
-<li style="vertical-align: sub;">Lookup V<span style="vertical-align: sub; font-size: 80%;">IH</span>, V<span style="vertical-align: sub; font-size: 80%;">IL</span>, V<span style="vertical-align: sub; font-size: 80%;">OH</span>, V<span style="vertical-align: sub; font-size: 80%;">OL</span> , for your chips an understand what they mean.</li>
+<li style="vertical-align: sub;">Lookup V<span style="vertical-align: sub; font-size: 80%;">IH</span>, V<span style="vertical-align: sub; font-size: 80%;">IL</span>, V<span style="vertical-align: sub; font-size: 80%;">OH</span>, V<span style="vertical-align: sub; font-size: 80%;">OL</span> , for your chips and understand what they mean.</li>
 <li style="vertical-align: sub;">Check both your internal and external pull-up/down resistors. &nbsp; Use a 100K ohm resistor connected to VCC or GND and poke it at your IOs to see whether they are being actively driven, floating, or pulled up/down.</li>
 </ul>
 </li>
@@ -114,7 +114,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li><span style="text-decoration: underline;">Are you reading the docs <a href="http://www.imdb.com/title/tt0090605/quotes?item=qt0424789">right</a>?</span></li>
 <li><span style="text-decoration: underline;">Do your pin numbers defined in your firmware match the schematic?</span></li>
 <li><span style="text-decoration: underline;">Are you using the right regster addresses? &nbsp;Are you accessing them as 16bit when they are only 8bit?</span></li>
-<li><span style="text-decoration: underline;">Does the PCB as built match the schematic? &nbsp; Version control is not used as well as often in hobby hardware development as it is in software development. &nbsp;It should be.</span></li>
+<li><span style="text-decoration: underline;">Does the PCB as built match the schematic? &nbsp; Version control is not used as often in hobby hardware development as it is in software development. &nbsp;It should be.</span></li>
 <li><span style="text-decoration: underline;">Is your scope or multimeter connected to the right pin? &nbsp;Pin one labeling can often be confusing and it can be hard to count fine pitch pins. &nbsp;Use labeled test points. &nbsp;Don't skimp on annotating your silk screen or use different color breadboard wires in some consistent manner such as red for power, black for ground, blue for IOs, green for clocks.</span></li>
 <li><span style="text-decoration: underline;">Are you assuming a pin is active high when it is relaly active low?</span></li>
 <li><span style="text-decoration: underline;">Are your clocks rising or falling edge?</span></li>
