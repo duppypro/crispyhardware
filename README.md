@@ -30,12 +30,14 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <ul>
 <li>Seriously. &nbsp;Double check with a voltmeter or LED.</li>
 <li>If battery powered, is the battery near full? &nbsp;I recommend replacing the battery with a bench supply while debugging.</li>
+<li>What chemistry battery are you using? &nbsp;Remember the voltage levels and discharge curves vary, that 1.5v AAA may actually only be 1.2V by design.</li>
 </ul>
 </li>
 <li>Are you using too much power?     
 <ul>
 <li>A good bench supply will tell you how much <strong>average </strong>current is being drawn. &nbsp;The average will catch some but not all issues.</li>
-<li><span>Often your micro will boot fine and only fail when y<span>ou</span> start turning on more modules or clocks or driving too many <span>LEDs</span> or motors. &nbsp;The failure level can vary greatly from chip to chip. &nbsp;Use a bench supply when possible during debugging, add extra <span>LEDs</span> on purpose to stress p<span>ower</span>, or write specific firmware to intentionally turn on as many of the <span>micro's</span> internal modules and clocks to stress p<span>ower</span>.</span></li>
+<li>A good bench supply will also have a current limiting feature. &nbsp;Are you allowing sufficient power?</li>
+<li><span>Often your micro will boot fine and only fail when y<span>ou</span> start turning on more modules or clocks or driving too many <span>LEDs</span> or motors. Radios (BLE, Wi-FI) and displays may also cause brown outs. &nbsp;The failure level can vary greatly from chip to chip. &nbsp;Use a bench supply when possible during debugging, add extra <span>LEDs</span> on purpose to stress p<span>ower</span>, or write specific firmware to intentionally turn on as many of the <span>micro's</span> internal modules and clocks to stress p<span>ower</span>.</span></li>
 </ul>
 </li>
 <li>Is the resistance of your power cable too high (often because it is too long)?     
@@ -74,7 +76,7 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li><span>Can someone recommend a good reference for more on <span>backdrive</span>?</span></li>
 </ul>
 </li>
-<li>Are you interfacing 3.3V logic to 5V logic?     
+<li>Are you interfacing 1.8V, 3.3V logic to 5V logic?     
 <ul>
 <li><a href="http://www.sparkfun.com"><span><span>Sparkfun</span> </span></a>has some <a href="http://www.sparkfun.com/tutorials/65">tips</a>.</li>
 <li><span>Also read the app notes from the <span>Downloads</span> tab on this </span><a href="https://www.adafruit.com"><span><span>adafruit</span> </span></a><a href="https://www.adafruit.com/products/757">product</a>.</li>
@@ -87,9 +89,10 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li><span style="text-decoration: underline;"><strong>R</strong><span><span>eset</span></span></span> 
 <ul>
 <li><span>Once your digital <span>ICs</span> have stable p<span>ower</span>, they still need a good R<span>eset</span> to start working.</span></li>
-<li><span>Many <span>ICs</span> have internal P<span>ower</span> On Resets (<span>POR</span>) so y<span>ou</span> may have been lured into skipping this step. &nbsp;Don't ignore it <span>becsause</span> your debug cable needs r<span>eset</span> to work well and it is also often very convenient to r<span>eset</span> your system during testing without having to cycle p<span>ower</span>.</span></li>
+<li><span>Many <span>ICs</span> have internal P<span>ower</span> On Resets (<span>POR</span>) so y<span>ou</span> may have been lured into skipping this step. &nbsp;Don't ignore it <span>because</span> your debug cable needs r<span>eset</span> to work well and it is also often very convenient to r<span>eset</span> your system during testing without having to cycle p<span>ower</span>.</span></li>
 <li>Check that any external reset signals are meeting the timing and voltage level requirements.</li>
 <li><span>Check that all <span>ICs</span> that take a r<span>eset</span> (whether explicit signal or implicit <span>POR</span>) are getting r<span>eset</span> at the same time. &nbsp; If not, understand the consequences. &nbsp;Recently I work a lot with </span><a href="http://www.electricimp.com">Electric Imp</a>. &nbsp;In these designs it is tempting to 'reset' by removing and re-inserting the Electric Imp card. &nbsp;The problem is that this does not reset the other digital devices that the Imp talks to. &nbsp;Are you having this problem?</li>
+<li>Do all ICs get reset when the controller gets an internal soft reset? &nbsp;For example, some I2C connected peripherals require a reset command to be sent over the bus, but if the controller resets while the target is responding with a data low, hte I2C bus may get hung.</li>
 </ul>
 </li>
 <li><span style="text-decoration: underline;"><strong>C</strong>locks</span> 
@@ -107,17 +110,20 @@ These are cloud connected hardware debug tools that help you follow the C.R.I.S.
 <li>Know which signals are edge vs. level sensitive. &nbsp;Level sensitive signals can look ugly as they change but must be stable around the setup and hold time of the receiving chip. Edge sensitive signals need to have clean changes and may need to be treated as <span style="text-decoration: underline;"><strong>C</strong>locks</span></li>
 <li style="vertical-align: sub;">Lookup V<span style="vertical-align: sub; font-size: 80%;">IH</span>, V<span style="vertical-align: sub; font-size: 80%;">IL</span>, V<span style="vertical-align: sub; font-size: 80%;">OH</span>, V<span style="vertical-align: sub; font-size: 80%;">OL</span> , for your chips and understand what they mean.</li>
 <li style="vertical-align: sub;">Check both your internal and external pull-up/down resistors. &nbsp; Use a 100K ohm resistor connected to VCC or GND and poke it at your IOs to see whether they are being actively driven, floating, or pulled up/down.</li>
+<li>Are lows really low? &nbsp;Do you really meet GND level, or not quite?</li>
 </ul>
 </li>
 <li><span style="text-decoration: underline;"><strong>Y</strong>ou</span> 
 <ul>
 <li><span style="text-decoration: underline;">Are you reading the docs <a href="http://www.imdb.com/title/tt0090605/quotes?item=qt0424789">right</a>?</span></li>
+<li>Are you reading the right docs? &nbsp;Check for the latest version that matches your device. &nbsp;Check for separate errata.</li>
 <li><span style="text-decoration: underline;">Do your pin numbers defined in your firmware match the schematic?</span></li>
-<li><span style="text-decoration: underline;">Are you using the right regster addresses? &nbsp;Are you accessing them as 16bit when they are only 8bit?</span></li>
+<li><span style="text-decoration: underline;">Are you using the right register addresses? &nbsp;Are you accessing them as 16bit when they are only 8bit?</span></li>
 <li><span style="text-decoration: underline;">Does the PCB as built match the schematic? &nbsp; Version control is not used as often in hobby hardware development as it is in software development. &nbsp;It should be.</span></li>
 <li><span style="text-decoration: underline;">Is your scope or multimeter connected to the right pin? &nbsp;Pin one labeling can often be confusing and it can be hard to count fine pitch pins. &nbsp;Use labeled test points. &nbsp;Don't skimp on annotating your silk screen or use different color breadboard wires in some consistent manner such as red for power, black for ground, blue for IOs, green for clocks.</span></li>
-<li><span style="text-decoration: underline;">Are you assuming a pin is active high when it is relaly active low?</span></li>
+<li><span style="text-decoration: underline;">Are you assuming a pin is active high when it is really active low?</span></li>
 <li><span style="text-decoration: underline;">Are your clocks rising or falling edge?</span></li>
+<li>Have you set your LA/scope trigger levels right? &nbsp;With a mix of 1.1V, 1.8V, 3.3V and 5V technologies, is your trigger level all embracing, or did you set it too high, or too low? &nbsp;A 5V low can be higher than a 1.1V high.</li>
 <li><span style="text-decoration: underline;">If you have a serial bus is it sending LSB or MSB first?</span></li>
 </ul>
 </li>
